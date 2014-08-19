@@ -9,15 +9,18 @@ before(function(done) {
 		options: { }
 	}, function (err) {
 		var get = function (request, reply) {
-			request.log('fnord', 'This is a message');
+			request.log('fnord', {message: 'This is a message'});
 			reply('Success!');
 		};
 
-		server.log('server', 'plugin loaded successfully');
+		// various ways of calling the log func
+		server.log([], 'plugin loaded successfully 1');
+		server.log('server', 'plugin loaded successfully 2');
+		server.log(['server'], 'plugin loaded successfully 3');
+		server.log(['server'], { message: 'plugin loaded successfully 4', context: 'some other data' });
 
 		server.route({ method: 'GET', path: '/', handler: get });
 		server.route({ method: 'GET', path: '/test/{param}', handler: function(request, reply) { reply(Hapi.error.internal('whoops')); } });
-		server.route({ method: 'GET', path: '/test2/{param}', handler: function(request, reply) { reply(Hapi.error.internal('whoops')); } });
 
 		done(err);
 	});

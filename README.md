@@ -75,8 +75,21 @@ would cause the following log message to be written (in addition to any other in
 ```
 {"name":"hapi-logger","hostname":"Me","pid":54705,"level":30,"tags":["get","testResource"],"req":{"id":"1408481983531-54705-47711","headers":{"user-agent":"curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5","host":"localhost:8080","accept":"*/*"},"method":"get","info":{"received":1408481983531,"remoteAddress":"127.0.0.1","remotePort":63014,"referrer":"","host":"localhost:8080"},"path":"/test/1234"},"msg":"Some important info...","time":"2014-08-19T20:59:43.542Z","v":0}
 ```
-
 In addition to user-initiated request log events, this module will also listen for server `log` events, `request` events, and `internalError` events, and log those if not filtered by the configured tags.
+
+To provide a little more context about a log message, you can log messages like so:
+
+```js
+server.log(['mytag'], { message: 'My log message', other: 'Some other data' });
+```
+
+By passing an object as the second paramter, you can pass along context with your message. If no message is detected a default message will be used. Here are the default messages for the corresponding Hapi events:
+
+* `log`: "Hapi Server Log"
+* `request`: "Hapi Server Request Log"
+
+If an `internalError` event is received, then the log message will be the error message.
+
 
 ## Version Compatibility
 
