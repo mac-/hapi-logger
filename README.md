@@ -1,7 +1,8 @@
 # hapi-logger
 
-[![Code Climate](https://codeclimate.com/github/mac-/hapi-logger.png)](https://codeclimate.com/github/mac-/hapi-logger)
 [![Build Status](https://secure.travis-ci.org/mac-/hapi-logger.png)](http://travis-ci.org/mac-/hapi-logger)
+[![Coverage Status](https://coveralls.io/repos/mac-/hapi-logger/badge.png)](https://coveralls.io/r/mac-/hapi-logger)
+[![Code Climate](https://codeclimate.com/github/mac-/hapi-logger.png)](https://codeclimate.com/github/mac-/hapi-logger)
 [![NPM version](https://badge.fury.io/js/hapi-logger.png)](http://badge.fury.io/js/hapi-logger)
 [![Dependency Status](https://david-dm.org/mac-/hapi-logger.png)](https://david-dm.org/mac-/hapi-logger)
 
@@ -25,7 +26,7 @@ var server = new Hapi.Server();
 
 var hapiLoggerConfig = {};
 
-server.pack.require('hapi-logger', hapiLoggerConfig, function(err) {
+server.pack.register({ plugin: require('hapi-logger'), options: hapiLoggerConfig }, function(err) {
 	if (err) {
 		console.log('error', 'Failed loading plugin: hapi-logger');
 	}
@@ -93,9 +94,10 @@ If an `internalError` event is received, then the log message will be the error 
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 6.x.x
+### Currently compatible with: Hapi 7.x.x
 
 * 0.1.x - Hapi 6.x.x
+* 0.2.x - Hapi 7.x.x
 
 # License
 
