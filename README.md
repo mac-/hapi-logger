@@ -12,6 +12,24 @@
 
 Bunyan is a great module for logging, but I like the flexibility that having tagged log messages gives me over your traditional log levels. Luckily Hapi already emits log events with tags, so we can add those tags to our log message. The current implementation of this module logs every message as "info" as far as bunyan is concerned, so you might as well ignore the "level" property on the log message. However, all the tags are included on the message, which should give enough context about the message.
 
+## Contributing
+
+This module makes use of a `Makefile` for building/testing purposes. After obtaining a copy of the repo, run the following commands to make sure everything is in working condition before you start your work:
+
+	make install
+	make test
+
+Before committing a change to your fork/branch, run the following commands to make sure nothing is broken:
+
+	make test
+	make test-cov
+
+Don't forget to bump the version in the `package.json` using the [semver](http://semver.org/spec/v2.0.0.html) spec as a guide for which part to bump. Submit a pull request when your work is complete.
+
+***Notes:***
+* Please do your best to ensure the code coverage does not drop. If new unit tests are required to maintain the same level of coverage, please include those in your pull request.
+* Please follow the same coding/formatting practices that have been established in the module.
+
 ## Installation
 
 	npm install hapi-logger
