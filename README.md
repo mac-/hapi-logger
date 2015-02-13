@@ -44,7 +44,7 @@ var server = new Hapi.Server();
 
 var hapiLoggerConfig = {};
 
-server.pack.register({ plugin: require('hapi-logger'), options: hapiLoggerConfig }, function(err) {
+server.register({ register: require('hapi-logger'), options: hapiLoggerConfig }, function(err) {
 	if (err) {
 		console.log('error', 'Failed loading plugin: hapi-logger');
 	}
@@ -112,10 +112,11 @@ If an `internalError` event is received, then the log message will be the error 
 
 ## Version Compatibility
 
-### Currently compatible with: Hapi 7.x.x
+### Currently compatible with: Hapi 8.x.x
 
 * 0.1.x - Hapi 6.x.x
 * 0.2.x - Hapi 7.x.x
+* 0.3.x - Hapi 8.x.x
 
 # License
 
