@@ -7,12 +7,12 @@
 	"version": "0.4.0",
 	"dependencies": {
 		"bunyan": "1.x.x",
-		"hoek": "2.x.x",
+		"hoek": "^3.0.4",
 		"underscore": "1.x.x"
 	},
 	"devDependencies": {
 		"blanket": "1.x.x",
-		"boom": "2.x.x",
+		"boom": "^3.0.0",
 		"coveralls": "2.x.x",
 		"hapi": "^11.x.x",
 		"jshint": "2.x.x",
