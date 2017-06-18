@@ -8,7 +8,7 @@
 
 [![NPM](https://nodei.co/npm/hapi-logger.png?downloads=true&stars=true)](https://nodei.co/npm/hapi-logger/)
 
-> A Hapi plugin for writing logs via bunyan
+> A Hapi plugin for writing logs to stdout via bunyan
 
 Bunyan is a great module for logging, but I like the flexibility that having tagged log messages gives me over your traditional log levels. Luckily Hapi already emits log events with tags, so we can add those tags to our log message. The current implementation of this module logs every message as "info" as far as bunyan is concerned, so you might as well ignore the "level" property on the log message. However, all the tags are included on the message, which should give enough context about the message.
 
@@ -64,14 +64,6 @@ A flag that tells bunyan whether or not to include the location from where the l
 ### `tags`
 
 A collection of tags to filter log messages by. If the collection includes `'*'` then all messages will be logged. Defaults to `['*']`
-
-### `transport`
-
-The way that log messages are written. Valid choices are `'file'` and `'console'`. Defaults to `'console'`
-
-### `logFilePath`
-
-If a `file` transport was specified, this tells bunyan the location of the file to write the logs to. Defaults to `'hapi-logger.log'`
 
 
 ## Example
