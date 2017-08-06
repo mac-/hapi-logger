@@ -155,6 +155,9 @@ Means that log messages with the tags `'error'` AND `'request'` will not get log
 
 Means that log messages with either the tag `'info'`  OR the tags `'error'` AND `'request'` will not get logged.
 
+### `shouldLog`
+
+A function that will receive the log data as a parameter and should return `true` if the message should be logged, or `false` if the message should not be logged. The `tags` and `ignoredTags` are evaulated first then this function will be executed. Defaults to `null`
 
 ## Example
 
