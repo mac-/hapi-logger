@@ -63,7 +63,97 @@ A flag that tells bunyan whether or not to include the location from where the l
 
 ### `tags`
 
-A collection of tags to filter log messages by. If the collection includes `'*'` then all messages will be logged. Defaults to `['*']`
+The tags used to determine when a log message is logged. This value can contain both strings and arrays of strings. The items in the top level of the collection are OR'd, while any items in nested arrays are AND'd. 
+
+If the collection includes `'*'` then all messages will be logged. Defaults to `['*']`
+
+#### Examples
+
+1. Top-level strings only:
+
+```js
+[
+	'error',
+	'info'
+]
+```
+
+Means that log messages with either the tag `'error'` OR `'info'` will get logged.
+
+2. Nested strings only:
+
+```js
+[
+	[
+		'error',
+		'request'
+	]
+]
+```
+
+Means that log messages with the tags `'error'` AND `'request'` will get logged.
+
+3. Top-level and nested strings:
+
+```js
+[
+	'info',
+	[
+		'error',
+		'request'
+	]
+]
+```
+
+Means that log messages with either the tag `'info'`  OR the tags `'error'` AND `'request'` will get logged.
+
+### `ignoredTags`
+
+The tags used to determine when a log message is NOT logged. This value can contain both strings and arrays of strings. The items in the top level of the collection are OR'd, while any items in nested arrays are AND'd.
+
+If the collection includes `'*'` then no messages will be logged. Defaults to `[]`
+
+**Note:** If a log message matches any of these tags, it will not be logged, even if it would have been because it matched values in `tags`.
+
+#### Examples
+
+1. Top-level strings only:
+
+```js
+[
+	'error',
+	'info'
+]
+```
+
+Means that log messages with either the tag `'error'` OR `'info'` will not get logged.
+
+2. Nested strings only:
+
+```js
+[
+	[
+		'error',
+		'request'
+	]
+]
+```
+
+Means that log messages with the tags `'error'` AND `'request'` will not get logged.
+
+3. Top-level and nested strings:
+
+```js
+[
+	'info',
+	[
+		'error',
+		'request'
+	]
+]
+```
+
+Means that log messages with either the tag `'info'`  OR the tags `'error'` AND `'request'` will not get logged.
 
 
 ## Example
@@ -86,7 +176,8 @@ would cause the following log message to be written (in addition to any other in
 ```
 {"name":"hapi-logger","hostname":"Me","pid":54705,"level":30,"tags":["get","testResource"],"req":{"id":"1408481983531-54705-47711","headers":{"user-agent":"curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5","host":"localhost:8080","accept":"*/*"},"method":"get","info":{"received":1408481983531,"remoteAddress":"127.0.0.1","remotePort":63014,"referrer":"","host":"localhost:8080"},"path":"/test/1234"},"msg":"Some important info...","time":"2014-08-19T20:59:43.542Z","v":0}
 ```
-In addition to user-initiated request log events, this module will also listen for server `log` events, `request` events, and `internalError` events, and log those if not filtered by the configured tags.
+
+In addition to user-initiated request log events, this module will also listen for server `log` events, `request` events, and `internalError` events, and log those if not filtered by the configured `tags` or `ignoredTags`.
 
 To provide a little more context about a log message, you can log messages like so:
 
@@ -101,7 +192,6 @@ By passing an object as the second paramter, you can pass along context with you
 
 If an `internalError` event is received, then the log message will be the error message.
 
-
 ## Version Compatibility
 
 ### Currently compatible with: Hapi 16.x.x
@@ -111,6 +201,7 @@ If an `internalError` event is received, then the log message will be the error 
 * 0.3.x - Hapi 8.x.x
 * 0.4.x - Hapi 11.x.x
 * 1.0.x - Hapi 16.x.x
+* 2.0.x - Hapi 16.x.x
 
 # License
 
